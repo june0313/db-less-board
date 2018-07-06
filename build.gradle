@@ -28,6 +28,7 @@ dependencies {
 //    compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0')
+    compile('com.google.guava:guava:25.1-jre')
     runtime('org.springframework.boot:spring-boot-devtools')
     compileOnly('org.projectlombok:lombok')
     testCompile('org.springframework.boot:spring-boot-starter-test')
