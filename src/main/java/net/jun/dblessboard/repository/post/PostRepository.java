@@ -26,6 +26,10 @@ public class PostRepository {
 		return Lists.newArrayList(postMap.values());
 	}
 
+	public Post findOne(Long id) {
+		return postMap.get(id);
+	}
+
 	public void save(Post post) {
 		final Long nextId = findNextId();
 		post.setId(nextId);

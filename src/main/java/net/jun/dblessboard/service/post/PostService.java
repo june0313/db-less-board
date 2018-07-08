@@ -30,4 +30,15 @@ public class PostService {
 
 		postRepository.save(post);
 	}
+
+	public PostDto getPost(Long id) {
+		Post post = postRepository.findOne(id);
+
+		return PostDto.builder()
+				.id(post.getId())
+				.contents(post.getContents())
+				.title(post.getTitle())
+				.writer(post.getWriter())
+				.build();
+	}
 }
