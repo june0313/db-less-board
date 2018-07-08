@@ -25,4 +25,19 @@ public class PostRepository {
 	public List<Post> findAll() {
 		return Lists.newArrayList(postMap.values());
 	}
+
+	public void save(Post post) {
+		final Long nextId = findNextId();
+		post.setId(nextId);
+		postMap.put(nextId, post);
+	}
+
+	private Long findNextId() {
+		if (postMap.isEmpty()) {
+			return 1L;
+		}
+
+		long maxId = postMap.keySet().stream().mapToLong(key -> key).max().orElse(0L);
+		return maxId + 1;
+	}
 }

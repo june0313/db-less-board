@@ -1,0 +1,26 @@
+{{#partial "body"}}
+    <div class="container">
+        <h3>포스트 작성</h3>
+
+        <form action="/posts/new" method="post">
+            <div class="form-group">
+                <label for="input-title">제목</label>
+                <input id="input-title" name="title" type="text" class="form-control" placeholder="제목을 입력하세요" required>
+            </div>
+
+            <div class="form-group">
+                <label for="input-content">내용</label>
+                <input id="input-content" name="contents" type="text" class="form-control" placeholder="내용을 입력하세요" required>
+            </div>
+
+            <div class="form-group">
+                <label for="input-writer">작성자</label>
+                <input id="input-writer" name="writer" type="text" class="form-control" placeholder="작성자를 입력하세요" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">작성 완료</button>
+        </form>
+    </div>
+{{/partial}}
+
+{{> layout/layout}}

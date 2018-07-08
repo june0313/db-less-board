@@ -1,13 +1,11 @@
-package net.jun.dblessboard.domain.post;
+package net.jun.dblessboard.service.post;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
-public class Post {
+public class PostDto {
 	private Long id;
 	private String title;
 	private String contents;

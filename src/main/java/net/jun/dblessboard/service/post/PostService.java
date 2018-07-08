@@ -20,4 +20,14 @@ public class PostService {
 	public List<Post> getAllPosts() {
 		return postRepository.findAll();
 	}
+
+	public void createPost(PostDto postDto) {
+		Post post = Post.builder()
+				.title(postDto.getTitle())
+				.contents(postDto.getContents())
+				.writer(postDto.getWriter())
+				.build();
+
+		postRepository.save(post);
+	}
 }
