@@ -1,11 +1,11 @@
 package net.jun.dblessboard.service.post;
 
 import net.jun.dblessboard.domain.post.Post;
+import net.jun.dblessboard.repository.Page;
 import net.jun.dblessboard.repository.post.PostRepository;
+import net.jun.dblessboard.service.DefaultPageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class PostService {
@@ -17,8 +17,13 @@ public class PostService {
 		this.postRepository = postRepository;
 	}
 
-	public List<Post> getAllPosts() {
-		return postRepository.findAll();
+	public PostListDto getAllPosts(int page) {
+		Page<Post> postPage = postRepository.findAll(DefaultPageable.of(page));
+
+		return PostListDto.builder()
+				.posts(postPage.getElements())
+				.totalCount(postPage.getTotalCount())
+				.build();
 	}
 
 	public void createPost(PostDto postDto) {

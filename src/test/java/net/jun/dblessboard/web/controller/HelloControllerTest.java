@@ -1,4 +1,4 @@
-package net.jun.dblessboard.web;
+package net.jun.dblessboard.web.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

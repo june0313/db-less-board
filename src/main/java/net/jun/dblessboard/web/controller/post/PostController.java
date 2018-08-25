@@ -1,16 +1,16 @@
-package net.jun.dblessboard.web.post;
+package net.jun.dblessboard.web.controller.post;
 
-import net.jun.dblessboard.domain.post.Post;
 import net.jun.dblessboard.service.post.PostDto;
+import net.jun.dblessboard.service.post.PostListDto;
 import net.jun.dblessboard.service.post.PostService;
+import net.jun.dblessboard.web.support.pagination.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PostController {
@@ -23,9 +23,16 @@ public class PostController {
 	}
 
 	@GetMapping({"/", "/posts"})
-	public String postList(Model model) {
-		final List<Post> posts = postService.getAllPosts();
-		model.addAttribute("posts", posts);
+	public String postList(@RequestParam(defaultValue = "1") int page, Model model) {
+		final PostListDto postListDto = postService.getAllPosts(page);
+		final Pagination pagination = Pagination.builder()
+				.basePath("/posts")
+				.currentPage(page)
+				.totalCount(postListDto.getTotalCount())
+				.build();
+
+		model.addAttribute("posts", postListDto.getPosts());
+		model.addAttribute("pagination", pagination);
 		return "post/list";
 	}
 

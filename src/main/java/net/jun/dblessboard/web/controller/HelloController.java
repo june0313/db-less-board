@@ -1,4 +1,4 @@
-package net.jun.dblessboard.web;
+package net.jun.dblessboard.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

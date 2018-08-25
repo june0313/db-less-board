@@ -1,0 +1,11 @@
+<nav aria-label="Page navigation">
+    {{#with pagination}}
+        <ul class="pagination">
+            <li class="page-item {{#unless hasPreviousPage}}disabled{{/unless}}"><a class="page-link" href="{{previousPageLink.url}}">Previous</a></li>
+            {{#each links}}
+                <li class="page-item {{#if selected}}active{{/if}}"><a class="page-link" href="{{url}}">{{page}}</a></li>
+            {{/each}}
+            <li class="page-item {{#unless hasNextPage}}disabled{{/unless}}"><a class="page-link" href="{{nextPageLink.url}}">Next</a></li>
+        </ul>
+    {{/with}}
+</nav>

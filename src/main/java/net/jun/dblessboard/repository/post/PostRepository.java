@@ -1,13 +1,16 @@
 package net.jun.dblessboard.repository.post;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.jun.dblessboard.domain.post.Post;
+import net.jun.dblessboard.repository.Page;
+import net.jun.dblessboard.repository.Pageable;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Component
 public class PostRepository {
@@ -17,13 +20,16 @@ public class PostRepository {
 	@PostConstruct
 	public void init() {
 		postMap = Maps.newHashMap();
-		postMap.put(1L, Post.builder().id(1L).title("나윤권").contents("기대").writer("user").build());
-		postMap.put(2L, Post.builder().id(2L).title("토이").contents("여전히").writer("june").build());
-		postMap.put(3L, Post.builder().id(3L).title("피구왕").contents("통키").writer("tongki").build());
+		IntStream.range(0, 65).forEach(i -> this.save(Post.builder().title("Lorem" + i).contents("Lorem ipsum dolor sit amet").writer("Ipsum").build()));
 	}
 
-	public List<Post> findAll() {
-		return Lists.newArrayList(postMap.values());
+	public Page<Post> findAll(Pageable pageable) {
+		final List<Post> postList = postMap.values().stream()
+				.skip(pageable.startIndex())
+				.limit(pageable.size())
+				.collect(Collectors.toList());
+
+		return Page.of(postMap.size(), pageable.page(), postList);
 	}
 
 	public Post findOne(Long id) {
